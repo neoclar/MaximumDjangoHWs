@@ -24,3 +24,9 @@ class Advertisement(models.Model):
     update_at = models.DateTimeField(auto_now=True)
     user = models.ForeignKey(User, verbose_name='Пользователь', on_delete=models.CASCADE)
     image = models.ImageField('Изображение', upload_to='advertisements/')
+
+    def __str__(self):
+        return f'id={self.id}, title={self.title}, price={self.price}'
+
+    class Meta: 
+        db_table = 'advertisements'
