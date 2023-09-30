@@ -43,11 +43,11 @@ class Advertisement(models.Model):
     @admin.display
     def created_at_view(self):
         if datetime.datetime.date(self.created_at)==datetime.datetime.date(datetime.datetime.today()):
-            return format_html(f'Сегодня, в {self.created_at.hour}:{self.created_at.minute}')
+            return format_html(f'<font color="MediumVioletRed">Сегодня, в {self.created_at.hour}:{self.created_at.minute}</font>')
         return self.created_at
 
     @admin.display
     def update_at_view(self):
         if datetime.datetime.date(self.update_at)==datetime.datetime.date(datetime.datetime.today()):
-            return format_html(f'Сегодня, в {self.update_at.hour}:{self.update_at.minute}')
+            return format_html(f'<font color="MediumVioletRed">Сегодня, в {self.update_at.hour}:{self.update_at.minute}</font>')
         return self.update_at
