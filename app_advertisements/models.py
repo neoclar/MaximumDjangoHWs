@@ -3,6 +3,7 @@ from django.db import models
 from django.contrib.auth import get_user_model
 from django.contrib import admin
 from django.utils.html import format_html
+from django.core.validators import RegexValidator
 # Create your models here.
 
 # ОБЪЯВЛЕНИЯ:
@@ -19,7 +20,7 @@ User = get_user_model()
 
 class Advertisement(models.Model):
     # Поля:
-    title = models.CharField('Заголовок', max_length=25)
+    title = models.CharField('Заголовок', max_length=25, validators=[RegexValidator(regex=r'\A\?', message='Заголовок не может начинаться с вопросительного знака!', inverse_match=True)])
     description = models.TextField('Описание', max_length=2048)
     price = models.DecimalField('Цена', max_digits=10, decimal_places=2)
     auction = models.BooleanField('Торг', help_text='Отметьте, если торг уместен')
