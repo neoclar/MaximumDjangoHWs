@@ -1,5 +1,8 @@
+import datetime
 from django.db import models
 from django.contrib.auth import get_user_model
+from django.contrib import admin
+from django.utils.html import format_html
 # Create your models here.
 
 # ОБЪЯВЛЕНИЯ:
@@ -30,3 +33,21 @@ class Advertisement(models.Model):
 
     class Meta: 
         db_table = 'advertisements'
+
+    @admin.display
+    def image_view(self):
+        if self.image:
+            return format_html(f'<img src=" /media/{self.image} " width=150 height=150>')
+        return format_html('<img src=" /static/img/adv.png " width=150 height=150>')
+
+    @admin.display
+    def created_at_view(self):
+        if datetime.datetime.date(self.created_at)==datetime.datetime.date(datetime.datetime.today()):
+            return format_html(f'Сегодня, в {self.created_at.hour}:{self.created_at.minute}')
+        return self.created_at
+
+    @admin.display
+    def update_at_view(self):
+        if datetime.datetime.date(self.update_at)==datetime.datetime.date(datetime.datetime.today()):
+            return format_html(f'Сегодня, в {self.update_at.hour}:{self.update_at.minute}')
+        return self.update_at
