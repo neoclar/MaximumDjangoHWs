@@ -1,5 +1,4 @@
 from django.shortcuts import redirect, render
-from django.http import HttpResponse
 from django.urls import reverse
 from .models import Advertisement
 from .forms import Advertisementform
