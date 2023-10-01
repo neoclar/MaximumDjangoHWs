@@ -1,7 +1,8 @@
 from django.shortcuts import redirect, render
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from .models import Advertisement
 from .forms import Advertisementform
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 def index(request):
@@ -15,6 +16,7 @@ def top_sellers(request):
 def advertisement(request):
     return render(request, 'app_advertisements/advertisement.html')
 
+@login_required(login_url=reverse_lazy('login'))
 def advertisement_post(request):
     if request.method == 'POST':
         form = Advertisementform(request.POST, request.FILES)
