@@ -42,13 +42,40 @@
       </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="#">
+      <a class="nav-link" href="{% url 'logout' %}">
         <span style="font-weight: bold;">Выйти</span>
       </a>
     </li>
     {% endif %}
   </ul>
   <div class="container">
+    {{ form.non_field.errors }}
+    <form method="post"> {% csrf_token %}
+      {% for field in form %}
+      <div class="row mb-3">
+        <div class="col">
+          <label class="col-sm-4 col-form-label offset-4">{{ field.label }}</label>
+          <div class="col-sm-4 offset-4 w-25">
+            {{ field }}
+            {% if field.errors %}
+              <div class="form-label bg-warning" style="margin: 10px 0px;"> {{ field.errors }}</div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+      <div class="row mb-3 offset-sm-5">
+        <div class="col">
+          <button type="submit" class="btn btn-success">Принять</button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+{% endblock %}
+
+<!-- У меня было так -->
+  <!-- <div class="container">
   <div class="row">
     <div class="col" style="margin: 50px;">
       <div class="display-2">
@@ -69,10 +96,7 @@
         </div>
       </div>
     </form>
-  </div>
-{% endblock %}
-
-
+  </div> -->
 
 
           <!-- <label class="col-sm-4 col-form-label offset-4">Username</label>
